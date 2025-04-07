@@ -10,9 +10,25 @@ Page({
     // 检查是否已登录
     const token = wx.getStorageSync('token');
     if (token) {
+      // 验证token有效性
+      this.verifyTokenAndRedirect();
+    }
+  },
+  
+  async verifyTokenAndRedirect() {
+    try {
+      // 验证token有效性
+      await http.get('/api/auth/verify-token');
+      
+      // 如果token有效,跳转到首页
       wx.switchTab({
         url: '/pages/index/index'
       });
+    } catch (error) {
+      console.error('Token验证失败:', error);
+      // token无效,清除旧数据
+      wx.removeStorageSync('token');
+      wx.removeStorageSync('userInfo');
     }
   },
 
@@ -55,11 +71,21 @@ Page({
       // 保存token
       wx.setStorageSync('token', res.access_token);
       
+      // 更新全局状态
+      const app = getApp();
+      if (app) {
+        app.globalData.token = res.access_token;
+        app.globalData.isLoggedIn = true;
+      }
+      
       // 获取用户信息
-      const userInfo = await http.get('/api/auth/profile', {
-        token: res.access_token
-      });
+      const userInfo = await http.get('/api/auth/profile');
       wx.setStorageSync('userInfo', userInfo);
+      
+      // 更新全局用户信息
+      if (app) {
+        app.globalData.userInfo = userInfo;
+      }
 
       wx.showToast({
         title: '登录成功',

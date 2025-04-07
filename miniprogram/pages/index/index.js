@@ -8,6 +8,7 @@ Page({
   },
 
   onLoad() {
+    this.checkLoginStatus();
     this.loadUserInfo();
     this.setCurrentDate();
     this.loadDuties();
@@ -16,15 +17,42 @@ Page({
   onShow() {
     this.loadDuties();
   },
+  
+  checkLoginStatus() {
+    const app = getApp();
+    const token = wx.getStorageSync('token');
+    
+    if (!token) {
+      wx.redirectTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
 
   async loadUserInfo() {
     try {
       const userInfo = wx.getStorageSync('userInfo');
       if (userInfo) {
         this.setData({ userInfo });
+      } else {
+        // 如果本地没有用户信息但有token,尝试从服务器获取
+        const token = wx.getStorageSync('token');
+        if (token) {
+          const userInfo = await http.get('/api/auth/profile');
+          wx.setStorageSync('userInfo', userInfo);
+          this.setData({ userInfo });
+        }
       }
     } catch (error) {
       console.error('加载用户信息失败:', error);
+      // 如果是认证错误,跳转到登录页
+      if (error.statusCode === 401) {
+        wx.removeStorageSync('token');
+        wx.removeStorageSync('userInfo');
+        wx.redirectTo({
+          url: '/pages/login/login'
+        });
+      }
     }
   },
 

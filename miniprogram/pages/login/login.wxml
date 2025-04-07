@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="login-form">
+    <view class="input-group">
+      <text class="input-label">用户名</text>
+      <input class="input" type="text" placeholder="请输入用户名" bindinput="onUsernameInput" value="{{username}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">密码</text>
+      <input class="input" type="password" placeholder="请输入密码" bindinput="onPasswordInput" value="{{password}}"/>
+    </view>
+    <button class="btn btn-primary" bindtap="onLogin">登录</button>
+    <button class="btn btn-default" bindtap="onRegister">注册账号</button>
+  </view>
+</view> 

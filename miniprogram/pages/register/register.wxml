@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="register-form">
+    <view class="input-group">
+      <text class="input-label">用户名</text>
+      <input class="input" type="text" placeholder="请输入用户名" bindinput="onUsernameInput" value="{{username}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">密码</text>
+      <input class="input" type="password" placeholder="请输入密码" bindinput="onPasswordInput" value="{{password}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">确认密码</text>
+      <input class="input" type="password" placeholder="请再次输入密码" bindinput="onConfirmPasswordInput" value="{{confirmPassword}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">真实姓名</text>
+      <input class="input" type="text" placeholder="请输入真实姓名" bindinput="onRealNameInput" value="{{realName}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">联系电话</text>
+      <input class="input" type="number" placeholder="请输入联系电话" bindinput="onPhoneInput" value="{{phone}}"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">所属部门</text>
+      <input class="input" type="text" placeholder="请输入所属部门" bindinput="onDepartmentInput" value="{{department}}"/>
+    </view>
+    <button class="btn btn-primary" bindtap="onRegister">注册</button>
+    <button class="btn btn-default" bindtap="onBack">返回登录</button>
+  </view>
+</view> 

@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="header">
+    <view class="user-info">
+      <text class="welcome">欢迎, {{userInfo.real_name || userInfo.username}}</text>
+      <text class="department">{{userInfo.department}}</text>
+    </view>
+  </view>
+
+  <view class="date-picker">
+    <picker mode="date" value="{{currentDate}}" start="2020-01-01" end="2030-12-31" bindchange="onDateChange">
+      <view class="picker">
+        选择日期: {{currentDate}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="duty-list">
+    <view class="list-title">今日值班安排</view>
+    <view class="list">
+      <block wx:if="{{duties.length > 0}}">
+        <view class="list-item" wx:for="{{duties}}" wx:key="id">
+          <view class="item-header">
+            <text class="shift">{{item.shift}}</text>
+            <text class="status {{item.status === 0 ? 'status-cancel' : ''}}">
+              {{item.status === 1 ? '正常' : '已取消'}}
+            </text>
+          </view>
+          <view class="item-content">
+            <text class="name">{{item.real_name}}</text>
+            <text class="department">{{item.department}}</text>
+          </view>
+          <view class="item-footer" wx:if="{{item.remark}}">
+            <text class="remark">备注: {{item.remark}}</text>
+          </view>
+        </view>
+      </block>
+      <view class="empty-tip" wx:else>
+        暂无值班安排
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons">
+    <button class="btn btn-primary" bindtap="onAddDuty">添加值班</button>
+    <button class="btn btn-default" bindtap="onViewMyDuties">查看我的值班</button>
+  </view>
+</view> 

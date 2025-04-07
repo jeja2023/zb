@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="duty-list">
+    <view class="list-title">我的值班记录</view>
+    <view class="list">
+      <block wx:if="{{duties.length > 0}}">
+        <view class="list-item" wx:for="{{duties}}" wx:key="id">
+          <view class="item-header">
+            <text class="date">{{item.date}}</text>
+            <text class="shift">{{item.shift}}</text>
+            <text class="status {{item.status === 0 ? 'status-cancel' : ''}}">
+              {{item.status === 1 ? '正常' : '已取消'}}
+            </text>
+          </view>
+          <view class="item-footer" wx:if="{{item.remark}}">
+            <text class="remark">备注: {{item.remark}}</text>
+          </view>
+          <view class="item-actions">
+            <button class="btn-mini" bindtap="onEdit" data-id="{{item.id}}">编辑</button>
+            <button class="btn-mini" bindtap="onDelete" data-id="{{item.id}}">删除</button>
+          </view>
+        </view>
+      </block>
+      <view class="empty-tip" wx:else>
+        暂无值班记录
+      </view>
+    </view>
+  </view>
+</view> 

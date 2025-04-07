@@ -1,0 +1,32 @@
+# IDE specific files
+.idea
+.vscode
+*.swp
+*.swo
+
+# Node modules
+node_modules/
+
+# miniprogram specific
+miniprogram_npm/
+miniprogram/node_modules
+
+# Local development
+project.private.config.json
+
+# npm
+package-lock.json
+
+# 微信开发者工具本地配置
+project.config.json
+
+# 临时文件
+*.log
+.DS_Store
+
+# Virtual environment
+.venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store 

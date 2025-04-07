@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="add-form">
+    <view class="input-group">
+      <text class="input-label">日期</text>
+      <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-12-31" bindchange="onDateChange">
+        <view class="picker">
+          {{date || '请选择日期'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">班次</text>
+      <picker bindchange="onShiftChange" value="{{shiftIndex}}" range="{{shifts}}">
+        <view class="picker">
+          {{shifts[shiftIndex] || '请选择班次'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">备注</text>
+      <textarea class="input" placeholder="请输入备注信息" bindinput="onRemarkInput" value="{{remark}}"/>
+    </view>
+
+    <button class="btn btn-primary" bindtap="onSubmit">提交</button>
+    <button class="btn btn-default" bindtap="onCancel">取消</button>
+  </view>
+</view> 

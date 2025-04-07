@@ -97,11 +97,22 @@ uvicorn main:app --reload
 ## 配置说明
 
 ### 后端配置
-在backend/.env文件中配置：
-- SECRET_KEY - JWT密钥
+1. 复制环境变量示例文件：
+```bash
+cp backend/.env.example backend/.env
+```
+
+2. 在backend/.env文件中配置以下内容：
+- SECRET_KEY - JWT密钥（建议使用随机生成的复杂字符串）
 - ALGORITHM - JWT算法（默认：HS256）
 - ACCESS_TOKEN_EXPIRE_MINUTES - Token过期时间（默认：60分钟）
 - DATABASE_URL - 数据库连接URL
+- HOST - 服务器主机地址（默认：0.0.0.0）
+- PORT - 服务器端口（默认：8000）
+- DEBUG - 调试模式（默认：True）
+- ALLOWED_ORIGINS - 允许的跨域源
+- ALLOWED_METHODS - 允许的HTTP方法
+- ALLOWED_HEADERS - 允许的HTTP头
 
 ### 前端配置
 在miniprogram/utils/http.js中配置：
